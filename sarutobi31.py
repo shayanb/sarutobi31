@@ -111,7 +111,7 @@ def playBitches():
 if __name__ == "__main__" :
 
 #Run genNewAddresses for the first run to generate N addresses and then comment it out
-    #genNewAddresses(100)
+    #genNewAddresses(10)
     addresses = read_addresses("0pubkeys.txt")
     address = addresses[0]
     playBitches()
