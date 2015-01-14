@@ -73,10 +73,10 @@ def genNewAddresses(num):
         private_key = os.urandom(32).encode('hex')
         addresses_list[keyUtils.keyToAddr(private_key)]=keyUtils.privateKeyToWif(private_key)
         #print keyUtils.keyToAddr(private_key)+ " : "+ keyUtils.privateKeyToWif(private_key)
-    print "== Import 0genwallet.key in multibit == "
+    print "== Import genwallet.key in multibit == "
     print "======================================="
-    file = open('0genwallet.key','a')
-    pubkeys = open('0pubkeys.txt','a')
+    file = open('genwallet.key','a')
+    pubkeys = open('pubkeys.txt','a')
     for key in addresses_list:
         pubkey = key
         line = addresses_list[key] + "  2015-01-12T01:00:17Z\n"
@@ -110,11 +110,13 @@ def playBitches():
 
 if __name__ == "__main__" :
 
-#Run genNewAddresses for the first run to generate N addresses and then comment it out
-    #genNewAddresses(10)
-    addresses = read_addresses("0pubkeys.txt")
-    address = addresses[0]
-    playBitches()
+    if (os.path.exists("./pubkeys.txt")):
+        addresses = read_addresses("pubkeys.txt")
+        address = addresses[0]
+        playBitches()
+    else:
+        print "Generating bitcoin addresses"
+        genNewAddresses(10)
+        print "Done, please rerun the script"
 
-#getData('dfibdasf#@$#@1fd34fsfR')
-#sendReward()
+
