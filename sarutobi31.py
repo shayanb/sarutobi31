@@ -40,7 +40,7 @@ def sendReward(address, i=0):
         print e
     print r.text
     if not ("html" in r.text):
-        if r.json()["thestatus"] == "sent" or i % 100 == 0:
+        if r.json()["thestatus"] == "sent" or i % 10 == 0:
             print address
             cookie = r.headers["set-cookie"].split(';')[0]
             print cookie
@@ -58,7 +58,8 @@ def getData(passw):
         print "HTTP ERROR"
         print e
     if ("error" in r.text):
-        print "Error (probably password is wrong)"
+        print "Error (probably wrong password)"
+        print r.text
     elif not ("html" in r.text):
         print   "Donation Address: " + str(r.json()["pk"]) + \
                 " Distance: " + str(r.json()["distance"]) + \
@@ -97,11 +98,11 @@ def read_addresses(file):
 
 
 def playBitches():
-    for i in xrange(1,999):
+    for i in xrange(1,42):
         print str(i)
         rand = random.randint(1,9)
         getData(client_pass)
-        time.sleep(1*rand)
+        time.sleep(3*rand)
         address_num = random.randint(1,len(addresses)-1)
         sendReward(addresses[address_num],i)
         time.sleep(rand+5)
